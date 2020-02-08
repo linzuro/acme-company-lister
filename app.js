@@ -3,10 +3,8 @@ const root = document.querySelector('#root')
 const { render } = ReactDOM;
 
 const companiesAPI = axios.get('https://acme-users-api-rev.herokuapp.com/api/companies')
-    //.then(response => response.data)
 
 const productsAPI = axios.get('https://acme-users-api-rev.herokuapp.com/api/products')
-   // .then(response => response.data)
 
 const p = Promise.all([companiesAPI, productsAPI])
     .then(results => {
@@ -18,7 +16,6 @@ const p = Promise.all([companiesAPI, productsAPI])
 
 const Nav = ({ companies, products, view }) => {
     const companiesLink = React.createElement('a', { key: 'companies', href: '#companies', className: (view === 'companies' || view === '' ? 'selected': '')}, `Companies(${companies.length})`)
-    console.log(this.key)
     const productsLink = React.createElement('a', { key: 'products', href: '#products', className: (view === 'products' ? 'selected': '')}, `Products(${products.length})`)
     return React.createElement('div', {className: 'navBar'}, companiesLink, productsLink)
 }
@@ -50,7 +47,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        p.then(result=>this.setState({companies:result.companies,products:result.products, view: window.location.hash.slice(1)}))
+        p.then(result=>this.setState({
+            companies:result.companies,
+            products:result.products, 
+            view: window.location.hash.slice(1)
+        }))
 
         window.addEventListener('hashchange', () => {
             this.setState({view: window.location.hash.slice(1)})
@@ -76,7 +77,3 @@ class App extends React.Component {
 
 render(React.createElement(App), root)
 
-
-    // .then(result => {
-    //     render()
-    // })
