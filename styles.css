@@ -1,0 +1,21 @@
+* {
+    font-family: 'Open Sans';
+}
+
+.navBar {
+    display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+}
+
+.selected {
+    background-color: tomato;
+    color: white;
+    border-radius: 15px;
+}
+
+a {
+    margin: 1rem;
+    padding: 1rem 3rem;
+    font-size: 25px;
+}
